@@ -4,7 +4,7 @@ author: "Ray Wright"
 date: "`r Sys.Date()`"
 output:
   html_document:
-    css: map_facet.css
+    css: reports/map_facet.css
 ---
 
 ```{r setup, include=FALSE}
@@ -38,13 +38,13 @@ library(geofacet)
 library(plotly)
 
 # https://hafen.github.io/grid-designer/
-pa_counties_grid = read_csv("pa_counties_grid.csv") %>% 
+pa_counties_grid = read_csv("data/pa_counties_grid.csv") %>% 
   filter(!is.na(row))
 
-cw_county = read_csv("cw_county.csv")
+cw_county = read_csv("data/cw_county.csv")
 
 data_death = read_csv(
-  "death_death.csv",
+  "data/death_death.csv",
   col_types = cols_only(
     CauseofDeaths = col_character(),
     CountyState = col_character(),
