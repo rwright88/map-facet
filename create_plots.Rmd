@@ -67,7 +67,6 @@ data_death_2 = data_death %>%
 This is a slightly modified example from https://hafen.github.io/geofacet/.
 
 ```{r}
-
 color_line = "#1f77b4"
 
 ggplot(state_unemp) +
@@ -81,7 +80,6 @@ ggplot(state_unemp) +
   ) +
   theme_bw() +
   theme(strip.text.x = element_text(size = 7))
-
 ```
 
 ## PA counties - geofacet
@@ -89,7 +87,6 @@ ggplot(state_unemp) +
 This is my unfinished example using EDDIE data and my custom PA county grid.
 
 ```{r}
-
 ggplot(data_death_2) +
   geom_line(aes(year_last, RateRatio), color = color_line, size = 1) +
   # geom_hline(aes(yintercept = 0)) +
@@ -102,7 +99,6 @@ ggplot(data_death_2) +
   ) +
   facet_geo(~code, grid = pa_counties_grid, label = "name") + 
   theme_bw()
-  
 ```
 
 ## PA counties - plotly
@@ -110,7 +106,6 @@ ggplot(data_death_2) +
 This is my unfinished example using plotly.
 
 ```{r}
-
 plot_county = function(x) {
   plot_data = filter(data_death_2, CountyState == x)
   plot_ly(plot_data) %>% 
@@ -136,5 +131,4 @@ map(cw_county$name, plot_county) %>%
     shareX = TRUE,
     shareY = TRUE
   )
-
 ```
