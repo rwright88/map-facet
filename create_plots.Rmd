@@ -1,5 +1,5 @@
 ---
-title: "geo facet"
+title: "PA county plot grid"
 author: "Ray Wright"
 date: "`r Sys.Date()`"
 output:
