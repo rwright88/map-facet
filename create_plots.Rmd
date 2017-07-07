@@ -4,7 +4,7 @@ author: "Ray Wright"
 date: "`r Sys.Date()`"
 output:
   html_document:
-    css: reports/map_facet.css
+    css: style/map_facet.css
 ---
 
 ```{r setup, include=FALSE}
