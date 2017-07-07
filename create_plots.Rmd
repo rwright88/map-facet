@@ -1,9 +1,5 @@
 ---
-<<<<<<< HEAD
 title: "PA county grid plot"
-=======
-title: "PA county plot grid"
->>>>>>> ea1c39cc1e8ad3c66982de1be1d4750150f7be98
 author: "Ray Wright"
 date: "`r Sys.Date()`"
 output:
