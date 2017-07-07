@@ -1,5 +1,5 @@
 ---
-title: "PA county grid"
+title: "PA county grid plot"
 author: "Ray Wright"
 date: "`r Sys.Date()`"
 output:
