@@ -4,7 +4,7 @@ author: "Ray Wright"
 date: "`r Sys.Date()`"
 output:
   html_document:
-    css: style/map_facet.css
+    css: www/map_facet.css
 ---
 
 ```{r setup, include=FALSE}
@@ -14,10 +14,10 @@ knitr::opts_chunk$set(
   echo = TRUE,
   message = FALSE,
   warning = FALSE,
-  out.width = 1100,
-  out.height = 800,
-  fig.width = 12,
-  fig.height = 9,
+  out.width = 1050,
+  out.height = 750,
+  fig.width = 11,
+  fig.height = 8,
   dev = "svglite",
   fig.ext = ".svg"
 )
@@ -29,7 +29,7 @@ Use the geofacet package to create a PA county grid of plots, similar to example
 
 ## Data
 
-Use custom-made Pennsylvania county grid and data from EDDIE.
+Custom-made Pennsylvania county grid and data from EDDIE.
 
 ```{r}
 library(tidyverse)
@@ -38,6 +38,7 @@ library(geofacet)
 library(plotly)
 
 # https://hafen.github.io/grid-designer/
+# https://mapchart.net/usa-counties.html
 pa_counties_grid = read_csv("data/pa_counties_grid.csv") %>% 
   filter(!is.na(row))
 
@@ -84,12 +85,12 @@ ggplot(state_unemp) +
 
 ## PA counties - geofacet
 
-This is my unfinished example using EDDIE data and my custom PA county grid.
+This is my example using EDDIE data and my custom PA county grid.
 
 ```{r}
 ggplot(data_death_2) +
   geom_line(aes(year_last, RateRatio), color = color_line, size = 1) +
-  # geom_hline(aes(yintercept = 0)) +
+  geom_area(aes(year_last, RateRatio), fill = color_line, alpha = 0.5) +
   scale_x_continuous(breaks = c(2000, 2005, 2010, 2015)) +
   scale_y_continuous(limits = c(-1.5, 31.5)) +
   labs(
@@ -106,12 +107,16 @@ ggplot(data_death_2) +
 This is my unfinished example using plotly.
 
 ```{r}
+county_order = arrange(pa_counties_grid, row, col) %>% pull(name)
+
 plot_county = function(x) {
   plot_data = filter(data_death_2, CountyState == x)
   plot_ly(plot_data) %>% 
     add_lines(
       ~year_last,
       ~RateRatio,
+      fill = "tozeroy",
+      connectgaps = TRUE,
       line = list(color = color_line, width = 3)
     ) %>% 
     layout(
@@ -122,7 +127,7 @@ plot_county = function(x) {
     )
 }
 
-map(cw_county$name, plot_county) %>% 
+map(county_order, plot_county) %>% 
   subplot(
     nrows = 7,
     margin = 0.01,
